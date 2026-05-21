@@ -6,12 +6,8 @@ Free AI posture coach — runs entirely in your browser. BlazePose tracks 33 bod
 
 **Clinical-grade posture and breath intelligence — on your device, in your browser.**
 
-[![Version](https://img.shields.io/badge/version-v14-00d4ff?style=flat-square&labelColor=0c1524)](CHANGELOG.md)
-[![License](https://img.shields.io/badge/license-MIT-00e87a?style=flat-square&labelColor=0c1524)](LICENSE)
-[![Languages](https://img.shields.io/badge/languages-7-a78bfa?style=flat-square&labelColor=0c1524)](#-multilingual-support)
-[![Guardrails](https://img.shields.io/badge/guardrails-14-ff9f0a?style=flat-square&labelColor=0c1524)](#-14-medical-guardrails)
-[![DISHA](https://img.shields.io/badge/DISHA-compliant-00c9a7?style=flat-square&labelColor=0c1524)](#privacy--compliance)
-[![PWA](https://img.shields.io/badge/PWA-ready-f5c842?style=flat-square&labelColor=0c1524)](#installation)
+<img width="964" height="638" alt="image" src="https://github.com/user-attachments/assets/1856edee-23cf-4287-8243-80f2e3c96463" />
+
 
 *Zero video upload · Zero subscriptions · Zero tracking · Runs entirely in your browser*
 
