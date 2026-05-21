@@ -6,6 +6,27 @@ Free AI posture coach — runs entirely in your browser. BlazePose tracks 33 bod
 
 <img width="964" height="638" alt="image" src="https://github.com/user-attachments/assets/1856edee-23cf-4287-8243-80f2e3c96463" />
 
+<img width="621" height="484" alt="image" src="https://github.com/user-attachments/assets/1339e478-8955-4468-a1ad-e6b31c95e38a" />
+
+<img width="965" height="592" alt="image" src="https://github.com/user-attachments/assets/b95a60ec-ccdd-4e13-a0b2-8fc03ca80791" />
+
+
+<img width="588" height="576" alt="image" src="https://github.com/user-attachments/assets/c9474613-3ea7-40e3-8e64-3ded9d426fa3" />
+
+
+<img width="472" height="555" alt="image" src="https://github.com/user-attachments/assets/48b65b50-d139-4aca-bad8-5d37014c809e" />
+
+
+<img width="507" height="525" alt="image" src="https://github.com/user-attachments/assets/d32e2a72-def1-40d3-9c53-94529ff255fa" />
+
+
+<img width="1008" height="599" alt="image" src="https://github.com/user-attachments/assets/da382525-aec6-4b8a-baa9-0481d05cf36c" />
+
+
+<img width="1007" height="460" alt="image" src="https://github.com/user-attachments/assets/c4206507-91dd-4d42-b496-e4fc26af1fb9" />
+
+
+<img width="1010" height="494" alt="image" src="https://github.com/user-attachments/assets/c2046407-1ed3-42f0-bf58-dfec0652798a" />
 
 *Zero video upload · Zero subscriptions · Zero tracking · Runs entirely in your browser*
 
