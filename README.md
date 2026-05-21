@@ -2,8 +2,6 @@
 Free AI posture coach — runs entirely in your browser. BlazePose tracks 33 body landmarks at 30fps. Personalised alerts for 12 health conditions including BP, diabetes &amp; spine disorders. Voice coaching, breath analysis &amp; inversion cap. No signup. No data uploaded.
 <div align="center">
 
-<img src="docs/screenshots/screen-analysis.svg" width="220" alt="FixMySpine AI – Analysis Screen"/>
-
 **Clinical-grade posture and breath intelligence — on your device, in your browser.**
 
 <img width="964" height="638" alt="image" src="https://github.com/user-attachments/assets/1856edee-23cf-4287-8243-80f2e3c96463" />
