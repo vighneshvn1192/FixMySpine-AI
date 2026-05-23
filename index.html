@@ -8,6 +8,20 @@
 <meta name="description" content="AI-powered posture and breath coaching. On-device, private, no subscriptions. Clinical guardrails for yoga, office posture, gym & rehabilitation.">
 <meta name="ms-age-rating" content="PEGI 3">
 <meta name="ms-content-id" content="FixMySpine AI-v14">
+<!-- ═══ iOS PWA ═══ -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FixMySpine AI">
+<!-- ═══ Android / PWA ═══ -->
+<meta name="theme-color" content="#04080f">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FixMySpine AI">
+<!-- Android Chrome -->
+<meta name="theme-color" content="#04080f">
+<meta name="mobile-web-app-capable" content="yes">
 <!-- ══ SECURITY: Content-Security-Policy ══ -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -37,6 +51,7 @@ const CONFIG = {
   FREE_MODE: true,
   CALENDLY_URL: 'https://calendly.com/vighneshvikram/1-1-consultation',
   BUSINESS_NAME: 'FixMySpine AI',
+  BUSINESS_EMAIL: 'hello@spineerectaai.com',
   SUPPORT_WA: '919400343395',  // Vighnesh — FixMySpine AI Expert
   PRIVACY_URL: '#privacy-modal',  // Opens inline modal
 
@@ -1062,6 +1077,341 @@ footer{background:var(--surf);border-top:1px solid var(--border);padding:24px 18
   transition:all .12s;
 }
 .al-fb-btn:hover{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE OPTIMISATION BLOCK
+   Targets: iOS Safari 14+, Android Chrome 90+
+   Breakpoints: 768px (tablet), 480px (large phone), 375px (small)
+══════════════════════════════════════════════════════════════ */
+
+/* ─── Fix 1: -webkit-backdrop-filter for iOS Safari blur ─── */
+#consent-wall .cw-top,
+.modal,
+#gr-emergency-overlay,
+#gr-inactivity-toast,
+.cam-overlay {
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Fix 2: touch-action on all interactive elements ─── */
+button, .lang-btn, .cw-item, .fc, .chip, .nav-btn, .nav-cta,
+.cbtn, .yn-btn, .btn-primary, .btn-secondary, .btn-gold, .btn-next,
+.cw-submit, .al-x, .al-fb-btn, .hitl-yes, .hitl-no {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Fix 3: :active states for touch feedback ─── */
+.btn-primary:active    { transform: scale(.97); }
+.btn-secondary:active  { transform: scale(.97); }
+.btn-gold:active       { transform: scale(.97); }
+.btn-next:active       { transform: scale(.97); }
+.cw-submit:active      { opacity: .8; }
+.cbtn-start:active:not(:disabled) { transform: scale(.97); }
+.lang-btn:active       { background: rgba(0,212,255,.15) !important; }
+.nav-btn:active        { background: rgba(0,212,255,.12); }
+.nav-cta:active        { background: rgba(245,200,66,.22); }
+.fc:active             { transform: translateY(-1px); }
+
+/* ─── Fix 4: -webkit-overflow-scrolling for iOS momentum scroll ─── */
+#consent-wall,
+.mbox,
+.tos-body,
+.spina-msgs,
+.qa-msgs,
+.cw-body {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ─── Fix 5: safe-area-inset for iPhone X+ notch / home indicator ─── */
+nav {
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
+}
+footer {
+  padding-bottom: max(24px, calc(18px + env(safe-area-inset-bottom)));
+}
+#gr-inactivity-toast {
+  bottom: max(80px, calc(60px + env(safe-area-inset-bottom)));
+}
+.cal { /* alert banners inside camera */
+  padding-bottom: max(11px, calc(8px + env(safe-area-inset-bottom)));
+}
+#qa-fab, #spina-mic-fab {
+  bottom: max(90px, calc(70px + env(safe-area-inset-bottom)));
+  right: max(22px, env(safe-area-inset-right));
+}
+
+/* ─── Fix 6: Remove white-space:nowrap from toast (overflows narrow) ─── */
+#gr-inactivity-toast {
+  white-space: normal;
+  max-width: min(320px, 88vw);
+  text-align: center;
+}
+
+/* ─── Fix 7: Input font-size ≥16px to prevent iOS auto-zoom ─── */
+.spina-input,
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  font-size: max(16px, 1em) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABLET (≤768px)
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Nav */
+  .nav-pill { display: none; }
+  nav {
+    padding: max(10px, env(safe-area-inset-top)) 14px 10px;
+    gap: 8px;
+  }
+  .nav-logo-main { font-size: .88rem; }
+  .lang-bar { gap: 3px; }
+  .lang-btn { font-size: .48rem; padding: 3px 6px; }
+
+  /* Hero */
+  .hero { padding: 48px 16px 36px; min-height: 72vh; }
+  .h1 { font-size: clamp(2rem, 9vw, 3rem); }
+  .h-sub { font-size: .78rem; }
+  .btn-primary, .btn-secondary { font-size: .8rem; padding: 12px 22px; }
+
+  /* Stats bar: 2×2 */
+  .sbar { grid-template-columns: 1fr 1fr; gap: 6px; padding: 14px; }
+  .sv { font-size: 1.2rem; }
+
+  /* Analysis section */
+  .asec { padding: 22px 14px; }
+  .sec-title { font-size: clamp(1.2rem, 5vw, 1.7rem); }
+
+  /* Camera aspect ratio — taller on portrait */
+  .camwrap { aspect-ratio: 3/4; max-height: 65vh; }
+
+  /* Metrics grid — single column */
+  .mgrid { grid-template-columns: 1fr; }
+  .mc { padding: 13px; }
+
+  /* Feature grid — single column */
+  .fgrid { grid-template-columns: 1fr; gap: 8px; }
+  .fsec { padding: 32px 14px; }
+
+  /* Expert CTA */
+  .expert-sec { padding: 28px 14px; }
+  .expert-title { font-size: 1.3rem; }
+  .btn-gold { font-size: .82rem; padding: 13px 24px; }
+
+  /* Modals — full width with safe area */
+  .modal { padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)); align-items: flex-end; }
+  .mbox {
+    border-radius: var(--r3) var(--r3) 0 0;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 24px 18px max(20px, env(safe-area-inset-bottom));
+  }
+  /* Privacy/ToS modals stay centered */
+  #privacy-modal, #tos-modal {
+    align-items: center;
+  }
+  #privacy-modal .mbox, #tos-modal .mbox {
+    border-radius: var(--r3);
+    max-height: 85vh;
+  }
+
+  /* Consent wall */
+  .cw-panel { max-width: 100%; }
+  .cw-top { padding: 10px 14px; gap: 6px; flex-wrap: wrap; }
+  .cw-badge { font-size: .44rem; }
+  .cw-body { padding: 16px 14px; }
+
+  /* Spina bar */
+  #spina-bar { padding: 12px 10px; }
+  .spina-input { min-height: 44px; }
+
+  /* QA FAB */
+  #qa-fab { width: 48px; height: 48px; font-size: 1.2rem; }
+
+  /* Footer */
+  footer { padding: 20px 14px max(20px, calc(16px + env(safe-area-inset-bottom))); }
+  .ftxt { font-size: .56rem; }
+
+  /* GR emergency overlay */
+  #gr-emergency-overlay { padding: max(28px, env(safe-area-inset-top)) 18px 28px; }
+  .gr-em-title { font-size: 1.4rem; }
+  .gr-em-msg { font-size: .92rem; }
+
+  /* GR symptoms grid — 1 col on tablet */
+  .gr-sym-grid { grid-template-columns: 1fr; }
+
+  /* Health wizard */
+  .gz-panel { max-width: 100%; padding: 0 14px; }
+  .yn-btns { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Reduce expensive background animations on mobile */
+  .hero-grid { animation: none; opacity: .3; }
+  .hero-glow { animation: none; opacity: .4; }
+  body::before { opacity: .08; } /* lighter noise */
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PHONE (≤480px)
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* Nav — compact, no overflow */
+  nav {
+    padding: max(8px, env(safe-area-inset-top)) 12px 8px;
+    flex-wrap: nowrap;
+  }
+  .nav-logo-main { font-size: .82rem; }
+  /* Hide all lang buttons in nav; language accessible via consent wall */
+  nav .lang-bar { display: none; }
+  /* Show compact lang toggle button instead */
+  nav::after {
+    content: '🌐';
+    font-size: .9rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 4px 6px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .nav-btn { font-size: .6rem; padding: 5px 8px; }
+  .nav-cta { font-size: .62rem; padding: 5px 9px; }
+
+  /* Hero */
+  .hero { padding: 36px 14px 28px; min-height: 60vh; }
+  .h-kicker { font-size: .5rem; padding: 3px 10px; }
+  .h1 { font-size: clamp(1.8rem, 10vw, 2.6rem); letter-spacing: -.04em; }
+  .h-sub { font-size: .74rem; margin-bottom: 24px; }
+  .h-ctas { flex-direction: column; align-items: center; gap: 8px; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 280px; text-align: center; font-size: .82rem; }
+
+  /* Stats bar — 2×2 tighter */
+  .sbar { padding: 12px 12px; gap: 4px; }
+  .sv { font-size: 1.1rem; }
+  .sl { font-size: .44rem; }
+
+  /* Camera controls — stack on very narrow */
+  .cam-ctrl { flex-direction: column; gap: 7px; }
+  .cbtn { width: 100%; min-height: 46px; font-size: .76rem; }
+
+  /* Alert banners — larger tap target dismiss */
+  .cal { font-size: .64rem; padding: 10px 12px; }
+  .al-x { min-width: 40px; min-height: 32px; font-size: .6rem; }
+
+  /* Metric cards */
+  .mv { font-size: 1.5rem; }
+  .mn { font-size: .5rem; }
+  .ms { font-size: .54rem; }
+
+  /* Feature cards */
+  .fc { padding: 14px 12px; }
+  .fc-title { font-size: .74rem; }
+  .fc-txt { font-size: .65rem; }
+
+  /* Expert section */
+  .expert-title { font-size: 1.2rem; }
+  .expert-desc { font-size: .74rem; }
+  .btn-gold { width: 100%; max-width: 280px; }
+
+  /* Consent wall */
+  .cw-top { justify-content: space-between; }
+  .cw-badge { display: none; } /* hide badge on tiny screens */
+  .cw-item { padding: 12px 10px; }
+  .cw-item-title { font-size: .74rem; }
+  .cw-item-desc { font-size: .65rem; }
+  .cw-submit { min-height: 52px; font-size: .72rem; }
+  .cw-juris-row .tag { font-size: .46rem; padding: 2px 6px; }
+
+  /* Health wizard */
+  .gz-title { font-size: 1.1rem; }
+  .yn-btns { gap: 6px; }
+  .yn-btn { min-height: 52px; font-size: .74rem; }
+
+  /* Spina input bar */
+  .spina-top-row { gap: 8px; }
+  .spina-name { font-size: .72rem; }
+  .spina-tagline { font-size: .44rem; }
+  .spina-input {
+    font-size: 16px !important; /* prevents iOS zoom */
+    min-height: 46px;
+    padding: 10px 12px;
+  }
+  .spina-btn { width: 44px; height: 44px; font-size: .9rem; }
+
+  /* Privacy / ToS modals — full screen on phone */
+  #privacy-modal .mbox,
+  #tos-modal .mbox {
+    max-height: 100vh;
+    border-radius: 0;
+    padding: max(20px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom));
+  }
+
+  /* Booking modal */
+  #exp-modal .mbox { padding: 20px 14px; }
+
+  /* Q&A panel — full width */
+  #qa-panel { width: calc(100vw - 16px); right: 8px; bottom: max(70px, calc(60px + env(safe-area-inset-bottom))); }
+
+  /* Footer links wrap nicely */
+  .ftxt { font-size: .55rem; line-height: 2.2; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SMALL PHONE (≤375px — iPhone SE, Galaxy A series)
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 375px) {
+  .h1 { font-size: clamp(1.6rem, 11vw, 2.2rem); }
+  .sbar { grid-template-columns: 1fr 1fr; gap: 3px; padding: 10px; }
+  .sv { font-size: 1rem; }
+  .mc { padding: 11px 10px; }
+  .mv { font-size: 1.3rem; }
+  .expert-title { font-size: 1.1rem; }
+  .cw-why-icon { font-size: .85rem; }
+  .cw-why-text { font-size: .66rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LANDSCAPE PHONE (e.g. iPhone rotated) — fix camera height
+══════════════════════════════════════════════════════════════ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { min-height: auto; padding: 24px 16px; }
+  .camwrap { aspect-ratio: 16/9; max-height: 55vh; }
+  .h1 { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .gr-em-pulse { width: 60px; height: 60px; font-size: 2rem; margin-bottom: 12px; }
+  .gr-em-title { font-size: 1.1rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PREFERS-REDUCED-MOTION — battery / accessibility
+══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.1ms !important;
+  }
+  .hero-grid, .hero-glow { display: none; }
+  body::before { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HIGH CONTRAST — accessibility
+══════════════════════════════════════════════════════════════ */
+@media (prefers-contrast: high) {
+  :root {
+    --border: rgba(255,255,255,.2);
+    --t2: #b0c4de;
+    --t3: #7a90b8;
+  }
+}
+
 </style>
 <body>
 
@@ -1216,7 +1566,7 @@ footer{background:var(--surf);border-top:1px solid var(--border);padding:24px 18
               <h4>4. Limitation of Liability</h4>
               <p>To the maximum extent permitted by applicable law (Indian Contract Act 1872, Consumer Protection Act 2019, and equivalent), FixMySpine AI shall not be liable for physical injury, health deterioration, or loss from use of the app. Use is entirely at your own risk.</p>
               <h4>5. Your Data Rights</h4>
-              <p>Under DPDPA 2023, GDPR, CCPA, PIPEDA, PDPA, AU Privacy Act, and UAE PDPL — you have the right to access, correct, and erase your data. Email: iamdigitalyogi@gmail.com. All requests actioned within 72 hours.</p>
+              <p>Under DPDPA 2023, GDPR, CCPA, PIPEDA, PDPA, AU Privacy Act, and UAE PDPL — you have the right to access, correct, and erase your data. Email: hello@spineerectaai.com. All requests actioned within 72 hours.</p>
               <h4>6. Governing Law</h4>
               <p>These terms are governed by applicable law in your jurisdiction. Disputes subject to competent courts in your territory. The app complies with all listed privacy regulations.</p>
             </div>
@@ -1455,7 +1805,7 @@ footer{background:var(--surf);border-top:1px solid var(--border);padding:24px 18
       <div class="cam-ov-icon">📷</div>
       <div class="cam-ov-txt">Click <strong style="color:var(--cyan)">Start Analysis</strong><br>Your spine is tracked live on-device</div>
     </div>
-    <video id="vid" playsinline muted autoplay></video>
+    <video id="vid" playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" muted autoplay></video>
     <canvas id="canv"></canvas>
     <div class="cam-corners"><div class="cc tl"></div><div class="cc tr"></div><div class="cc bl"></div><div class="cc br"></div></div>
     <div class="cam-status"><span class="live-dot" id="live-dot"></span><span id="cam-txt">STANDBY</span></div>
@@ -2621,6 +2971,13 @@ const STRINGS = {
     invAlert_b:       '⏱ Inversion detected — please ease out within {n}s to stay safe',
     invAlert_v:       'Lovely pose! Just a gentle heads up — with {cond}, it is safest to ease out within {n} seconds. Take your time, move slowly.',
     invExit_v:        'Time to gently come out of this pose. Take a slow breath, and ease yourself back to a comfortable position. Well done for listening to your body.',
+    invEntry_v:        'Inversion detected. Tracking your hold. Breathe steadily.',
+    invWarn8_b:        '⏱ 8 seconds held — prepare to exit this pose',
+    invWarn8_v:        'Eight seconds. Take one more breath and begin coming out gently.',
+    invWarn8_highBP:   'Eight seconds in inversion — your blood pressure is rising. Begin exiting now, slowly.',
+    invWarn8_lowBP:    'Eight seconds. Start preparing to come out — bend your knees first and rise slowly.',
+    invExit_highBP:    'Please exit immediately. Inversion time limit reached. Blood pressure may be dangerously elevated. Come down now and rest.',
+    invExit_lowBP:     'Exit now. Rise very slowly — pause halfway up, keep your knees bent, and wait before standing fully to avoid dizziness.',
 
     /* Breath alerts */
     breathAlert_b:    '🫁 Belly breathing feels wonderful — try shifting your breath down',
@@ -2747,6 +3104,13 @@ const STRINGS = {
     invAlert_b:       '⏱ आसन मिला — कृपया {n} सेकंड में धीरे से बाहर आएं',
     invAlert_v:       'सुंदर आसन! {cond} को ध्यान में रखते हुए — कृपया {n} सेकंड में धीरे से बाहर आएं। समय लें।',
     invExit_v:        'धीरे से इस आसन से बाहर आएं। एक गहरी सांस लें और आराम से वापस आएं।',
+    invEntry_v:        'उलटा आसन मिला। होल्ड ट्रैक हो रहा है। स्थिर सांस लें।',
+    invWarn8_b:        '⏱ 8 सेकंड हो गए — अब धीरे से बाहर आने की तैयारी करें',
+    invWarn8_v:        'आठ सेकंड। एक और सांस लें और धीरे से बाहर आना शुरू करें।',
+    invWarn8_highBP:   'आठ सेकंड — ब्लड प्रेशर बढ़ रहा है। अभी धीरे से बाहर आना शुरू करें।',
+    invWarn8_lowBP:    'आठ सेकंड। धीरे-धीरे बाहर आने की तैयारी करें — पहले घुटने मोड़ें, फिर उठें।',
+    invExit_highBP:    'अभी बाहर आएं। सीमा समाप्त। ब्लड प्रेशर खतरनाक हो सकता है। तुरंत नीचे आएं और आराम करें।',
+    invExit_lowBP:     'अब बाहर आएं। बहुत धीरे उठें — घुटने मोड़ें, बीच में रुकें, चक्कर से बचने के लिए धीरे खड़े हों।',
     breathAlert_b:    '🫁 पेट की सांस लेने की कोशिश करें — कंधे नरम करें',
     breathAlert_v:    'एक प्रेमपूर्ण निमंत्रण — कंधों को नरम करें और पेट को सांस के साथ फैलने दें। पेट की सांस पूरे तंत्र को शांत करती है।',
     breathHITL_v:     'धन्यवाद। चूंकि आप सीने से सांस ले रहे हैं — पूरी तरह छोड़ें, फिर पेट को धीरे से फुलाएं।',
@@ -2871,6 +3235,13 @@ const STRINGS = {
     invAlert_b:       '⏱ Inversion détectée — sortez doucement en {n}s pour votre sécurité',
     invAlert_v:       'Belle posture ! Avec {cond}, il est préférable de sortir dans {n} secondes. Prenez votre temps.',
     invExit_v:        'Il est temps de sortir doucement de cette posture. Respirez profondément et revenez confortablement.',
+    invEntry_v:        'Inversion détectée. Suivi du maintien. Respirez régulièrement.',
+    invWarn8_b:        '⏱ 8 secondes maintenues — préparez-vous à sortir de la posture',
+    invWarn8_v:        'Huit secondes. Prenez une dernière inspiration et commencez à sortir doucement.',
+    invWarn8_highBP:   'Huit secondes en inversion — votre tension artérielle monte. Commencez à sortir maintenant, lentement.',
+    invWarn8_lowBP:    "Huit secondes. Préparez-vous à sortir — pliez d'abord les genoux et montez lentement.",
+    invExit_highBP:    'Sortez immédiatement. Limite atteinte. La tension peut être dangereusement élevée. Descendez et reposez-vous.',
+    invExit_lowBP:     'Sortez maintenant. Montez très lentement — pause à mi-chemin, genoux fléchis, avant de vous redresser complètement.',
     breathAlert_b:    '🫁 La respiration abdominale est apaisante — essayez de descendre le souffle',
     breathAlert_v:    'Une invitation douce — assouplissez vos épaules et laissez votre ventre se gonfler à chaque inspiration. La respiration abdominale calme tout le système.',
     breathHITL_v:     'Merci pour ce retour. Puisque vous respirez par la poitrine — expirez à fond, puis laissez le ventre s\'expanser doucement.',
@@ -2945,6 +3316,13 @@ const STRINGS = {
     invAlert_b:       '⏱ Inversion erkannt — bitte in {n}s vorsichtig herausgehen',
     invAlert_v:       'Schöne Pose! Mit {cond} ist es sicherer, in {n} Sekunden langsam herauszukommen. Nehmen Sie sich Zeit.',
     invExit_v:        'Zeit, sanft aus dieser Pose herauszukommen. Atmen Sie tief durch und kehren Sie bequem zurück.',
+    invEntry_v:        'Inversion erkannt. Haltezeit wird verfolgt. Atmen Sie gleichmäßig.',
+    invWarn8_b:        '⏱ 8 Sekunden gehalten — bereiten Sie sich auf den Ausstieg vor',
+    invWarn8_v:        'Acht Sekunden. Nehmen Sie einen weiteren Atemzug und kommen Sie langsam heraus.',
+    invWarn8_highBP:   'Acht Sekunden in der Inversion — Ihr Blutdruck steigt. Beginnen Sie jetzt langsam herauszukommen.',
+    invWarn8_lowBP:    'Acht Sekunden. Bereiten Sie sich auf den Ausstieg vor — Knie zuerst beugen, dann langsam aufstehen.',
+    invExit_highBP:    'Bitte sofort aussteigen. Zeitlimit erreicht. Blutdruck kann gefährlich erhöht sein. Kommen Sie jetzt herunter.',
+    invExit_lowBP:     'Jetzt aussteigen. Sehr langsam aufstehen — auf halbem Weg pausieren, Knie gebeugt halten, um Schwindel zu vermeiden.',
     breathAlert_b:    '🫁 Bauchatmung tut so gut — versuchen Sie, den Atem nach unten zu leiten',
     breathAlert_v:    'Eine sanfte Einladung — weichen Sie die Schultern auf und lassen Sie den Bauch mit jedem Atemzug aufgehen. Bauchatmung beruhigt das ganze System.',
     breathHITL_v:     'Danke für Ihre Rückmeldung. Da Sie durch den Brustkorb atmen — atmen Sie vollständig aus, dann lassen Sie den Bauch sanft aufgehen.',
@@ -3019,6 +3397,13 @@ const STRINGS = {
     invAlert_b:       '⏱ Inversión detectada — sal suavemente en {n}s para estar seguro/a',
     invAlert_v:       'Bonita postura. Con {cond}, lo más seguro es salir en {n} segundos. Tómate tu tiempo.',
     invExit_v:        'Es hora de salir suavemente de esta postura. Respira profundo y regresa cómodamente.',
+    invEntry_v:        'Inversión detectada. Rastreando la retención. Respira con calma.',
+    invWarn8_b:        '⏱ 8 segundos sostenidos — prepárate para salir de la postura',
+    invWarn8_v:        'Ocho segundos. Toma un último aliento y empieza a salir con suavidad.',
+    invWarn8_highBP:   'Ocho segundos en inversión — tu presión arterial está subiendo. Comienza a salir ahora, despacio.',
+    invWarn8_lowBP:    'Ocho segundos. Prepárate para salir — dobla primero las rodillas y sube muy lento.',
+    invExit_highBP:    'Sal inmediatamente. Límite alcanzado. La presión puede estar peligrosamente elevada. Baja ya y descansa.',
+    invExit_lowBP:     'Sal ahora. Sube muy despacio — haz una pausa a mitad de camino, rodillas dobladas, antes de ponerte de pie.',
     breathAlert_b:    '🫁 La respiración abdominal es maravillosa — intenta bajar la respiración',
     breathAlert_v:    'Una invitación gentil — suaviza los hombros y deja que el vientre se expanda con cada respiración. La respiración abdominal calma todo el sistema.',
     breathHITL_v:     'Gracias por confirmar. Ya que respiras por el pecho — exhala completamente, luego deja que el vientre se expanda suavemente.',
@@ -3093,6 +3478,13 @@ const STRINGS = {
     invAlert_b:       '⏱ 检测到倒立体式 — 请在{n}秒内轻柔退出以保安全',
     invAlert_v:       '美丽的体式！考虑到{cond}，最安全的做法是在{n}秒内缓慢退出。请慢慢来。',
     invExit_v:        '是时候轻柔地退出这个体式了。深呼吸一次，然后舒适地回到休息位置。您做得很好。',
+    invEntry_v:        '检测到倒立体式，正在追踪保持时间，请保持稳定呼吸。',
+    invWarn8_b:        '⏱ 已保持8秒 — 准备退出体式',
+    invWarn8_v:        '八秒钟。再吸一口气，然后轻柔退出体式。',
+    invWarn8_highBP:   '倒立八秒 — 您的血压正在升高，请现在开始缓慢退出。',
+    invWarn8_lowBP:    '八秒钟，准备退出 — 先弯曲膝盖，然后缓慢站起以防头晕。',
+    invExit_highBP:    '请立即退出！已达时间上限。血压可能危险升高，请马上俯卧休息。',
+    invExit_lowBP:     '现在退出。非常缓慢站起 — 中途暂停，保持膝盖弯曲，防止头晕。',
     breathAlert_b:    '🫁 腹式呼吸非常美妙 — 试着将呼吸引导至腹部',
     breathAlert_v:    '温柔的邀请 — 放松双肩，让腹部随每次呼吸自然扩张。腹式呼吸能平静整个神经系统。',
     breathHITL_v:     '感谢您的确认。既然您在用胸部呼吸 — 请完全呼出，然后让腹部轻柔地随吸气扩张。',
@@ -3166,6 +3558,13 @@ const STRINGS = {
     invAlert_b:       '⏱ تم الكشف عن وضع مقلوب — اخرج برفق في {n} ثانية للسلامة',
     invAlert_v:       'وضع جميل! مع وجود {cond}، الأفضل الخروج في {n} ثوانٍ. خذ وقتك.',
     invExit_v:        'حان وقت الخروج برفق من هذا الوضع. خذ نفساً عميقاً وعد إلى وضع مريح. أحسنت الاستماع لجسدك.',
+    invEntry_v:        'تم اكتشاف وضع مقلوب. جارٍ تتبع مدة الثبات. تنفّس بانتظام.',
+    invWarn8_b:        '⏱ 8 ثوانٍ — استعد للخروج من الوضع',
+    invWarn8_v:        'ثماني ثوانٍ. خذ نفساً أخيراً وابدأ في الخروج برفق.',
+    invWarn8_highBP:   'ثماني ثوانٍ في الوضع المقلوب — ضغط دمك يرتفع. ابدأ الخروج الآن ببطء.',
+    invWarn8_lowBP:    'ثماني ثوانٍ. استعد للخروج — انحنِ بركبتيك أولاً ثم قم ببطء شديد.',
+    invExit_highBP:    'اخرج فوراً. انتهى الحد. قد يكون ضغط الدم مرتفعاً بشكل خطير. انزل الآن واسترح.',
+    invExit_lowBP:     'اخرج الآن. قم ببطء شديد — توقف في المنتصف مع انحناء الركبتين لتجنب الدوخة.',
     breathAlert_b:    '🫁 التنفس البطني رائع — حاول إنزال تنفسك للبطن',
     breathAlert_v:    'دعوة لطيفة — ليّن كتفيك ودع بطنك يتمدد مع كل شهيق. التنفس البطني يهدّئ الجهاز العصبي بأكمله.',
     breathHITL_v:     'شكراً على التأكيد. بما أنك تتنفس من الصدر — أخرج الهواء بالكامل، ثم دع بطنك يتمدد بلطف مع الشهيق.',
@@ -3554,7 +3953,7 @@ const U = {
   running:false, paused:false, stream:null,
   calib:[], neutral:null,
   spineDev:0, slouchT:null, slouchFired:false,
-  invOn:false, invStart:null, invPose:'', invFired:false,
+  invOn:false, invStart:null, invPose:'', invFired:false, invWarn8:false,
   breathBuf:[], clav:false, breathFired:false, clavCount:0, _clavStartTime:null,
   hitlOn:false, hitlLog:[], hitlLast:0,
   bwBuf: new Array(120).fill(.5), bwReady:false, bwCtx:null,
@@ -4224,6 +4623,7 @@ function speak(txt){
 function beep(f=660,d=.28,t='sine'){
   try{
     if(!U.actx)U.actx=new(window.AudioContext||window.webkitAudioContext)();
+    if(U.actx.state==='suspended')U.actx.resume();  // iOS Safari fix
     const o=U.actx.createOscillator(),g=U.actx.createGain();
     o.connect(g);g.connect(U.actx.destination);
     o.frequency.value=f;o.type=t;
@@ -4252,9 +4652,23 @@ async function startCam(){
   if(!GR_RateLimit.check('startCam', 8, 60000)){
     toast('Too many camera start attempts. Please wait.','warn'); return;
   }
-  try{if(!U.actx)U.actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
   try{
-    U.stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},facingMode:'user'},audio:false});
+    if(!U.actx) U.actx = new(window.AudioContext||window.webkitAudioContext)();
+    // iOS Safari suspends AudioContext until user gesture — resume explicitly
+    if(U.actx.state === 'suspended') await U.actx.resume();
+  }catch(e){}
+  try{
+    // Mobile-optimised camera constraints with fallback chain
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const camConstraints = isMobile
+      ? { video:{ facingMode:'user', width:{ideal:480}, height:{ideal:640} }, audio:false }  // portrait-first on mobile
+      : { video:{ width:{ideal:640}, height:{ideal:480}, facingMode:'user' }, audio:false };   // landscape on desktop
+    try {
+      U.stream = await navigator.mediaDevices.getUserMedia(camConstraints);
+    } catch(e1) {
+      // Fallback: try without size hints (some older Android)
+      U.stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' }, audio:false });
+    }
     vid.srcObject=U.stream;
     await vid.play();
     canv.width=vid.videoWidth||640; canv.height=vid.videoHeight||480;
@@ -4615,24 +5029,38 @@ function processInv(lS,rS,lH,rH,lW,rW,lK,rK,lA,rA,nose){
   if(U.neutral===null) return;
   const pose=detectInv(lS,rS,lH,rH,lW,rW,lK,rK,lA,rA,nose);
 
+  // ── Entry: inversion just started ─────────────────────────────
   if(pose&&!U.invOn){
-    U.invOn=true; U.invStart=Date.now(); U.invPose=pose; U.invFired=false;
+    U.invOn=true; U.invStart=Date.now(); U.invPose=pose;
+    U.invFired=false; U.invWarn8=false;
     setV('ms-inv',pose+' detected');
+
     if(hasInv()){
+      // BP / cardiac user — urgent banner + beep on entry
       const c2=cap();
       const condList=[...U.yes].filter(id=>CONDS.find(c=>c.id===id)?.riskInv)
         .map(id=>CONDS.find(c=>c.id===id)?.q.split(' (')[0]).join(' & ');
       const banner = L('invAlert_b').replace('{n}',c2);
       const voice  = L('invAlert_v').replace('{cond}',condList).replace('{n}',c2);
       alQueue(1,'al-b', banner, voice);
-      beep(550,.4,'sine');
+      // Double beep — urgent entry signal for BP users
+      beep(660,.25,'sine'); setTimeout(()=>beep(550,.35,'sine'),280);
+    } else {
+      // Healthy user — gentle entry voice only (no banner spam)
+      setTimeout(()=>speak(L('invEntry_v')), 400);
+      beep(550,.2,'sine');
     }
   }
+
+  // ── Exit: inversion just ended ─────────────────────────────
   if(!pose&&U.invOn){
-    U.invOn=false; U.invStart=null; U.invFired=false;
+    U.invOn=false; U.invStart=null; U.invFired=false; U.invWarn8=false;
     hideAl('al-b');
-    setV('vl-inv','0s'); setB('bf-inv',0,'g'); setBg('bd-inv','SAFE','g'); setV('ms-inv','No inversion detected');
+    setV('vl-inv','0s'); setB('bf-inv',0,'g'); setBg('bd-inv','SAFE','g');
+    setV('ms-inv','No inversion detected');
   }
+
+  // ── Timer: inversion in progress ───────────────────────────
   if(U.invOn&&U.invStart){
     const el=(Date.now()-U.invStart)/1000;
     const lim=hasInv()?cap():60;
@@ -4640,11 +5068,45 @@ function processInv(lS,rS,lH,rH,lW,rW,lK,rK,lA,rA,nose){
     setV('vl-inv',el.toFixed(0)+'s');
     setB('bf-inv',pct,pct>80?'r':pct>50?'a':'g');
     setBg('bd-inv',pct>80?'DANGER':pct>50?'CAUTION':'SAFE',pct>80?'a':pct>50?'w':'g');
+
+    // ── 8-second progressive warning — fires for ALL users ──
+    if(el>=8 && !U.invWarn8){
+      U.invWarn8=true;
+      // 3 ascending tones: clear audio cue regardless of sound level
+      beep(440,.18,'sine');
+      setTimeout(()=>beep(550,.18,'sine'),200);
+      setTimeout(()=>beep(660,.28,'sine'),400);
+
+      window.speechSynthesis?.cancel();
+      if(U.yes.has('highBP')){
+        speak(L('invWarn8_highBP'));
+        // Also refresh banner with 8s-specific message for BP users
+        alQueue(1,'al-b', L('invWarn8_b'), ''); // voice already fired directly
+      } else if(U.yes.has('lowBP')){
+        speak(L('invWarn8_lowBP'));
+        alQueue(1,'al-b', L('invWarn8_b'), '');
+      } else {
+        speak(L('invWarn8_v'));
+      }
+    }
+
+    // ── Hard cap — time limit reached ───────────────────────
     if(el>=lim&&!U.invFired){
       U.invFired=true;
-      beep(550,.4,'sine'); setTimeout(()=>beep(440,.4,'sine'),320);
+      // Descending triple beep — unmistakable "stop" signal
+      beep(660,.3,'square');
+      setTimeout(()=>beep(550,.35,'square'),280);
+      setTimeout(()=>beep(440,.45,'square'),560);
       window.speechSynthesis?.cancel();
-      speak(L('invExit_v'));
+
+      // BP-specific exit voices — different urgency per condition
+      if(U.yes.has('highBP')){
+        speak(L('invExit_highBP'));
+      } else if(U.yes.has('lowBP')){
+        speak(L('invExit_lowBP'));
+      } else {
+        speak(L('invExit_v'));
+      }
     }
   }
 }
@@ -5272,7 +5734,9 @@ window.spinaToggleMic = function(){
   if(SPINA.recording){ spinaStopMic(); return; }
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SR){
-    toast('Voice input not available in this browser — please type','warn'); return;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    toast(isIOS ? 'Voice input is not supported on iOS Safari. Please type your question.' : 'Voice input not available in this browser — please type','warn');
+    return;
   }
   const langMap = {en:'en-US',hi:'hi-IN',fr:'fr-FR',de:'de-DE',es:'es-ES',zh:'zh-CN',ar:'ar-SA'};
   SPINA.recognition = new SR();
