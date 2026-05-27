@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <!-- Microsoft Store / PWA meta tags -->
 <meta name="application-name" content="FixMySpine AI">
-<meta name="description" content="AI-powered posture and breath coaching. On-device, private, no subscriptions. Clinical guardrails for yoga, office posture, gym & rehabilitation.">
+<meta name="description" content="AI-powered posture and breath coaching. On-device, private, no subscriptions. Safety guardrails for yoga, office posture, gym & wellness recovery.">
 <meta name="ms-age-rating" content="PEGI 3">
-<meta name="ms-content-id" content="FixMySpine AI-v14">
+<meta name="ms-content-id" content="FixMySpineAI-v16">
+<meta name="ms-category" content="Health &amp; Fitness">
+<meta name="keywords" content="posture correction,posture app,AI posture coach,desk posture,back posture,posture tracker,sitting posture,neck posture,ergonomic posture,posture habits,mobility exercises,stretch reminders,flexibility coach,desk wellness,work from home posture,computer posture,office posture,wellness posture">
+<!-- OpenGraph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="FixMySpine AI — Free AI Posture &amp; Wellness Coach">
+<meta property="og:description" content="Real-time AI posture tracking for desk workers, students &amp; remote teams. On-device privacy, ergonomic guidance, mobility reminders. Free forever.">
+<meta property="og:site_name" content="FixMySpine AI">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FixMySpine AI — Free AI Posture &amp; Wellness Coach">
+<meta name="twitter:description" content="On-device AI posture coach for desk workers. Real-time ergonomic guidance, breath awareness, mobility reminders. Zero uploads, 100% private.">
 <!-- ═══ iOS PWA ═══ -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,13 +26,7 @@
 <!-- ═══ Android / PWA ═══ -->
 <meta name="theme-color" content="#04080f">
 <meta name="mobile-web-app-capable" content="yes">
-<!-- iOS PWA -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="FixMySpine AI">
-<!-- Android Chrome -->
-<meta name="theme-color" content="#04080f">
-<meta name="mobile-web-app-capable" content="yes">
+
 <!-- ══ SECURITY: Content-Security-Policy ══ -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -37,7 +42,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<title>FixMySpine AI — Clinical Posture Intelligence</title>
+<title>FixMySpine AI — Free AI Posture Coach for Desk Workers &amp; Remote Teams</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -1412,8 +1417,85 @@ textarea {
   }
 }
 
+
+/* ══════════════════════════════════════════════════════
+   SAFETY BANNER & TRUST SYSTEM — v16
+══════════════════════════════════════════════════════ */
+#safety-banner {
+  display: none;
+  position: fixed;
+  top: 52px;
+  left: 0; right: 0;
+  z-index: 900;
+  background: linear-gradient(90deg, rgba(255,61,85,.08), rgba(255,159,10,.06));
+  border-bottom: 1px solid rgba(255,159,10,.2);
+  padding: 6px 16px;
+  font-family: var(--mono);
+  font-size: .58rem;
+  color: var(--t2);
+  text-align: center;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+#safety-banner strong { color: var(--red); }
+body.analysis-active #safety-banner { display: block; }
+.trust-row { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:12px 0 0; }
+.trust-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 11px; border-radius:20px;
+  border:1px solid rgba(0,212,255,.15); background:rgba(0,212,255,.04);
+  font-family:var(--mono); font-size:.52rem; color:var(--t3); letter-spacing:.07em; white-space:nowrap;
+}
+.trust-badge .tb-dot { width:5px;height:5px;border-radius:50%;background:var(--grn);flex-shrink:0;animation:tbPulse 2.4s ease-in-out infinite; }
+@keyframes tbPulse { 0%,100%{opacity:1}50%{opacity:.35} }
+.trust-badge.priv { border-color:rgba(0,232,122,.15);background:rgba(0,232,122,.04); }
+.trust-badge.warn { border-color:rgba(255,159,10,.15);background:rgba(255,159,10,.04); }
+.trust-badge.warn .tb-dot { background:var(--amb); }
+.ai-limit-note {
+  display:flex; align-items:flex-start; gap:9px;
+  background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.07); border-radius:12px;
+  padding:11px 14px; margin:14px 0 0; font-size:.64rem; color:var(--t3); line-height:1.7;
+}
+.ai-limit-note .aln-ico { font-size:.85rem; flex-shrink:0; margin-top:1px; }
+.results-disclaimer {
+  background:rgba(255,255,255,.02); border-left:2px solid rgba(255,159,10,.3);
+  border-radius:0 10px 10px 0; padding:8px 12px; margin:10px 0;
+  font-size:.62rem; color:var(--t3); line-height:1.65;
+}
+@media(max-width:480px){
+  #safety-banner{font-size:.54rem;padding:5px 12px;}
+  .trust-badge{font-size:.48rem;}
+}
+
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "FixMySpine AI",
+  "applicationCategory": "HealthApplication",
+  "applicationSubCategory": "Wellness and Fitness",
+  "operatingSystem": "Windows, Android, iOS, Web",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "description": "Free AI-powered posture and wellness coach for desk workers, students and remote teams. Real-time on-device posture tracking, ergonomic guidance, breath awareness and mobility reminders.",
+  "featureList": ["Real-time AI posture tracking","On-device processing — zero uploads","Ergonomic desk posture guidance","Breath awareness coaching","7 language support","Privacy-first — no biometric identification","Free forever"],
+  "author": {"@type":"Person","name":"Vighnesh Vikram"},
+  "softwareVersion": "16.0",
+  "url": "https://spineerectaai.com"
+}
+</script>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:4px;z-index:9999;background:var(--bg2);color:var(--cyan);padding:8px 16px;border-radius:8px;font-size:.75rem;font-family:var(--mono);text-decoration:none;">Skip to content</a>
+<!-- MS Store ASO -->
+<div id="ms-store-meta" style="display:none" aria-hidden="true" itemscope itemtype="https://schema.org/SoftwareApplication"><meta itemprop="name" content="FixMySpine AI — Free AI Posture Coach"><meta itemprop="applicationCategory" content="HealthApplication"><meta itemprop="description" content="Free AI-powered posture coach for desk workers, students and remote teams. Real-time on-device AI posture tracking, ergonomic guidance, breath awareness and mobility reminders. 100% private — zero uploads. No subscriptions."><meta itemprop="operatingSystem" content="Windows, Android, iOS, Web"><meta itemprop="softwareVersion" content="16.0"><meta itemprop="offers" content="Free"><meta itemprop="keywords" content="posture correction,posture app,AI posture coach,desk posture,back posture,posture tracker,sitting posture,neck posture,ergonomic posture,posture habits,mobility exercises,stretch reminders,flexibility coach,desk wellness,work from home posture,computer posture,office posture,wellness posture"></div>
+
+<!-- ══ Persistent Safety Banner (shown during posture analysis) ══ -->
+<div id="safety-banner" role="alert" aria-live="polite">
+  <strong>⚠ Safety:</strong> Stop immediately if you feel pain, dizziness, tingling, numbness, or any discomfort. This app provides wellness guidance only — not medical advice.
+</div>
+
 
 <!-- ════════════════════════════════════════════════════════
    CONSENT WALL — Shown ONCE before health wizard
@@ -1434,7 +1516,7 @@ textarea {
       </svg>
       <span class="cw-logo-name">FixMySpine <span>AI</span></span>
     </div>
-    <span class="cw-badge">Privacy &amp; Informed Consent · v9</span>
+    <span class="cw-badge">Privacy &amp; Wellness Consent · v16</span>
     <div class="lang-bar" id="cw-lang-bar">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('hi')">हि</button>
@@ -1456,7 +1538,7 @@ textarea {
           Why We Collect Your Data &amp; How We Use It
         </div>
         <div class="cw-why-row"><span class="cw-why-icon">🤖</span>
-          <span class="cw-why-text"><strong>To train AI for better outputs.</strong> Your anonymised health flags and session patterns help us continuously improve posture alert accuracy and clinical thresholds — making the app smarter for everyone.</span></div>
+          <span class="cw-why-text"><strong>To train AI for better outputs.</strong> Your anonymised health flags and session patterns help us continuously improve posture alert accuracy and wellness alert thresholds — making the app smarter for everyone.</span></div>
         <div class="cw-why-row"><span class="cw-why-icon">🎯</span>
           <span class="cw-why-text"><strong>To personalise your safety experience.</strong> Your health conditions let us cap inversion timers, prioritise the right alerts, and suggest safe poses — not one-size-fits-all advice.</span></div>
         <div class="cw-why-row"><span class="cw-why-icon">🔒</span>
@@ -1578,7 +1660,7 @@ textarea {
           <div class="cw-box" id="cb5"></div>
           <div class="cw-item-body">
             <div class="cw-item-title">Anonymous Analytics to Improve AI <span class="tag-opt">OPTIONAL</span></div>
-            <div class="cw-item-desc">I consent to FixMySpine AI sending my <strong style="color:var(--t1)">anonymised practice type, country, and condition flags</strong> (no name, email, video, or contact info) to help improve clinical alert thresholds and AI accuracy. I can withdraw this consent any time.</div>
+            <div class="cw-item-desc">I consent to FixMySpine AI sending my <strong style="color:var(--t1)">anonymised practice type, country, and condition flags</strong> (no name, email, video, or contact info) to help improve wellness alert thresholds and AI accuracy. I can withdraw this consent any time.</div>
           </div>
         </div>
 
@@ -1668,7 +1750,7 @@ textarea {
             <option value="">Select practice</option>
             <option>Yoga / Asana</option><option>Pranayama / Breathwork</option>
             <option>Office / Desk Posture</option><option>Gym / Strength Training</option>
-            <option>Meditation</option><option>Physical Therapy / Rehab</option>
+            <option>Meditation</option><option>Wellness Guidance / Rehab</option>
             <option>Sports / Athletics</option>
           </select>
           <div class="ferr" id="e-prac">Please select a practice</div>
@@ -1686,7 +1768,7 @@ textarea {
       <div class="step-pg" id="sp2">
         <div class="step-tag"><span class="step-dot"></span>Step 2 of 4 · Heart &amp; Metabolism</div>
         <div class="step-h1">Cardiovascular Health</div>
-        <div class="step-sub">Your answers directly control inversion timers and BP alerts. All required.</div>
+        <div class="step-sub">Your answers directly control inversion timers and posture reminders. All required.</div>
         <div id="cs2"></div>
         <div class="step-nav">
           <button class="btn-back" onclick="goBack(2)">← Back</button>
@@ -1749,9 +1831,9 @@ textarea {
     </svg>
     <div class="nav-logo-text">
       <span class="nav-logo-main">FixMySpine <b>AI</b></span>
-      <span class="nav-logo-sub">Clinical Posture Intelligence</span>
+      <span class="nav-logo-sub">AI Posture &amp; Wellness Coach</span>
     </div>
-    <span class="nav-pill">v14 · Free · 7 Lang · 14 Guardrails</span>
+    <span class="nav-pill">v16 · Free · 7 Lang · Wellness-First</span>
   </div>
   <div class="nav-right">
     <div class="lang-bar" id="nav-lang-bar">
@@ -1768,13 +1850,13 @@ textarea {
   </div>
 </nav>
 
-<section class="hero">
+<section id="main-content" class="hero" aria-label="FixMySpine AI — AI Posture and Wellness Coach">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hc">
-    <div class="h-kicker"><span class="h-kicker-dot"></span>BlazePose · BP Safety · Breath AI · On-Device · 100% Free</div>
-    <h1 class="h1">Your Posture.<br><em>Corrected. Free.</em></h1>
-    <p class="h-sub">Clinical spine calibration · Personalised BP alerts · AI breath coaching<br>Inversion cap at 10s · Zero subscriptions · Runs on your phone</p>
+    <div class="h-kicker"><span class="h-kicker-dot"></span>BlazePose · Inversion Awareness · Breath AI · On-Device · 100% Free</div>
+    <h1 class="h1">Your Posture.<br><em>Coached by AI. Free.</em></h1>
+    <p class="h-sub">Personalised posture insights · Ergonomic guidance · Breath awareness coaching<br>Inversion reminders · Zero subscriptions · Runs on your phone</p>
     <div class="h-ctas">
       <button class="btn-primary" onclick="scrollToId('asec')">▶ Start Live Analysis</button>
       <button class="btn-secondary" onclick="openCalendly()">🎯 Book Expert Session</button>
@@ -1783,8 +1865,23 @@ textarea {
   </div>
 </section>
 
+
+  <!-- Trust & Privacy Badges -->
+  <div class="trust-row" role="list" aria-label="Privacy and safety commitments">
+    <span class="trust-badge priv" role="listitem"><span class="tb-dot"></span>Zero Camera Uploads</span>
+    <span class="trust-badge priv" role="listitem"><span class="tb-dot"></span>On-Device AI</span>
+    <span class="trust-badge priv" role="listitem"><span class="tb-dot"></span>No Biometric ID</span>
+    <span class="trust-badge priv" role="listitem"><span class="tb-dot"></span>User-Controlled Data</span>
+    <span class="trust-badge warn" role="listitem"><span class="tb-dot"></span>Not a Medical Device</span>
+    <span class="trust-badge warn" role="listitem"><span class="tb-dot"></span>Wellness Guidance Only</span>
+  </div>
+  <div class="ai-limit-note" style="max-width:560px;margin:14px auto 0;" role="note">
+    <span class="aln-ico">🤖</span>
+    <span>AI posture insights may occasionally be inaccurate or unsuitable for certain individuals. Results vary. Consult a healthcare professional for any medical concerns.</span>
+  </div>
+
 <div class="sbar">
-  <div class="si"><span class="sv">99%</span><span class="sl">Accuracy</span></div>
+  <div class="si"><span class="sv">~16ms</span><span class="sl">Response</span></div>
   <div class="si"><span class="sv">30%</span><span class="sl">Slouch Alert</span></div>
   <div class="si"><span class="sv">10s</span><span class="sl">BP Cap</span></div>
   <div class="si"><span class="sv">~16ms</span><span class="sl">On-Device</span></div>
@@ -1792,7 +1889,7 @@ textarea {
 
 <section class="asec" id="asec">
   <p class="sec-label">Live Analysis Engine</p>
-  <h2 class="sec-title">Clinical Posture Analysis</h2>
+  <h2 class="sec-title">AI Posture Analysis</h2>
   <p class="sec-desc">On-device WebGL — no video uploaded. BlazePose tracks 33 body landmarks at 30fps. Calibrates to YOUR spine on startup.</p>
 
   <div class="flags-strip" id="flags-strip">
@@ -1867,6 +1964,12 @@ textarea {
     </div>
   </div>
 
+  
+  <!-- Results Disclaimer -->
+  <div class="results-disclaimer" role="note">
+    📊 <strong>About your results:</strong> Posture insights are for wellness awareness only. Individual results vary — consistency, movement habits, ergonomics, and lifestyle all influence posture improvement. This is not a diagnosis.
+  </div>
+
   <div class="mgrid">
     <div class="mc">
       <div class="mhd"><span class="mn">Spine Bend</span><span class="mbg g" id="bd-spine">UPRIGHT</span></div>
@@ -1921,30 +2024,114 @@ textarea {
 
 <section class="fsec">
   <p class="sec-label">How It Works</p>
-  <h2 class="sec-title">Clinical-Grade AI</h2>
+  <h2 class="sec-title">On-Device AI Wellness Engine</h2>
   <div class="fgrid">
     <div class="fc"><span class="fc-num">01</span><span class="fc-ico">🎯</span><div class="fc-title">BlazePose On-Device</div><div class="fc-txt">33 landmarks at 30fps via WebGL. Zero video upload. Runs in your browser.</div></div>
     <div class="fc"><span class="fc-num">02</span><span class="fc-ico">📐</span><div class="fc-title">Personal Calibration</div><div class="fc-txt">Learns YOUR neutral spine in 40 frames. Alerts at 30% deviation from your baseline.</div></div>
-    <div class="fc"><span class="fc-num">03</span><span class="fc-ico">❤️</span><div class="fc-title">BP Safety</div><div class="fc-txt">Detects Downward Dog, Triangle, Uttanasana, Sarvangasana. 10s cap for high-risk users.</div></div>
+    <div class="fc"><span class="fc-num">03</span><span class="fc-ico">❤️</span><div class="fc-title">Inversion Awareness</div><div class="fc-txt">Tracks inversion poses — Downward Dog, Triangle, Sarvangasana. Time-aware reminders for mindful practice.</div></div>
     <div class="fc"><span class="fc-num">04</span><span class="fc-ico">🫁</span><div class="fc-title">Breath Intelligence</div><div class="fc-txt">Shoulder Y-axis stdDev separates clavicular from diaphragmatic breathing accurately.</div></div>
     <div class="fc"><span class="fc-num">05</span><span class="fc-ico">🤝</span><div class="fc-title">Human-in-Loop AI</div><div class="fc-txt">Only asks you when genuinely uncertain. Your answers train the model. 30s cooldown.</div></div>
-    <div class="fc"><span class="fc-num">06</span><span class="fc-ico">💬</span><div class="fc-title">Priority Alert Queue</div><div class="fc-txt">One alert at a time, highest priority first. BP → Spine → Breath → Diabetes. No overlap.</div></div>
-    <div class="fc"><span class="fc-num">07</span><span class="fc-ico">🛡️</span><div class="fc-title">14 Medical Guardrails</div><div class="fc-txt">No-diagnosis rule, emergency stop for chest pain, approved yoga library only, DISHA on-device compliance, protected groups (elderly/pregnant), anti-anxiety language, rate limiter, XSS sanitizer.</div></div>
+    <div class="fc"><span class="fc-num">06</span><span class="fc-ico">💬</span><div class="fc-title">Priority Alert Queue</div><div class="fc-txt">One alert at a time, highest priority first. Ergonomics → Posture → Breath → Wellness. No overlap.</div></div>
+    <div class="fc"><span class="fc-num">07</span><span class="fc-ico">🛡️</span><div class="fc-title">14 Safety Guardrails</div><div class="fc-txt">Stop-if-pain rule, emergency guidance, approved yoga library, on-device privacy compliance, protected groups (elderly/pregnant), calm wellness language, rate limiter, XSS sanitizer.</div></div>
   </div>
 </section>
 
-<div class="expert-sec">
+<section class="expert-sec" aria-label="Book a Wellness Expert">
   <div class="expert-eyebrow">Free 1:1 Consultation</div>
-  <h2 class="expert-title">Book a Session with<br>a Certified Physiotherapist</h2>
-  <p class="expert-desc">Our experts review your personalised posture data before the call. 45-min session. Clinical recommendations. First session free.</p>
+  <h2 class="expert-title">Book a Free Session with<br>a Wellness Expert</h2>
+  <p class="expert-desc">Your wellness expert reviews your posture profile before the call. 45-min personalised session with an experienced guide. First session completely free.</p>
   <button class="btn-gold" onclick="openCalendly()">📅 Book Your Free Session →</button>
   <div class="expert-trust">No credit card · Instant confirmation · Calendly powered</div>
 </div>
 
-<footer>
+
+<!-- ══ FAQ Section ══ -->
+<section class="fsec" aria-label="Frequently Asked Questions" style="padding-top:32px;padding-bottom:32px;">
+  <div class="sec-eyebrow" style="text-align:center;font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;color:var(--cyan);margin-bottom:8px;">FAQ</div>
+  <h2 class="sec-title" style="text-align:center;font-size:clamp(1.2rem,4vw,1.8rem);margin-bottom:28px;">Common Questions</h2>
+  <div style="max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:10px;">
+
+    <details class="faq-item" open>
+      <summary class="faq-q">Is FixMySpine AI a medical app?</summary>
+      <div class="faq-a">No. FixMySpine AI is a wellness and ergonomic guidance app. It is not a medical device and does not diagnose, treat, or cure any medical condition. It is designed for posture awareness, ergonomic education, and mobility guidance only. Always consult a qualified healthcare professional for medical concerns.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Does the app upload my camera feed?</summary>
+      <div class="faq-a">Never. All posture analysis happens 100% on your device using on-device AI. No video frames, images, or biometric data are ever transmitted or stored externally. Your camera feed is processed in real-time locally and immediately discarded.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Is it really free?</summary>
+      <div class="faq-a">Yes, completely free. No subscriptions, no trials, no paywalls. The expert booking session is optional and the first consultation is free. The core posture tracking, breath coaching, and all AI features cost nothing.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">What devices does it work on?</summary>
+      <div class="faq-a">FixMySpine AI runs in any modern browser on Windows, macOS, Android, and iOS. It works as a PWA (installable app) on all platforms, including Microsoft Store on Windows. A front-facing camera is required for posture analysis.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">How accurate is the AI posture detection?</summary>
+      <div class="faq-a">The AI tracks 33 body landmarks in real-time using on-device machine learning. Accuracy depends on lighting, camera position, and how much of your body is visible. The app displays a confidence score and only issues alerts above the 65% confidence threshold. Results are for wellness guidance — not clinical assessment.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">I have a health condition — is it safe to use?</summary>
+      <div class="faq-a">The app includes a health profile that activates additional safety reminders for conditions like high blood pressure, spinal conditions, and respiratory concerns. However, always consult your doctor before starting any new exercise or posture programme. Stop immediately if you feel pain, dizziness, or discomfort.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Which languages are supported?</summary>
+      <div class="faq-a">English, Hindi (हिन्दी), French (Français), German (Deutsch), Spanish (Español), Chinese (中文), and Arabic (العربية). All alerts, voice coaching, and AI responses are localised.</div>
+    </details>
+
+  </div>
+</section>
+
+<style>
+.faq-item {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.faq-item[open] { border-color: rgba(0,212,255,.2); }
+.faq-q {
+  padding: 13px 16px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--t1);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after { content: '+'; color: var(--cyan); font-size: 1.1rem; font-weight: 300; flex-shrink: 0; transition: transform .2s; }
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  padding: 0 16px 13px;
+  font-size: .7rem;
+  color: var(--t2);
+  line-height: 1.75;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+@media(max-width:480px) {
+  .faq-q { font-size: .72rem; }
+  .faq-a { font-size: .67rem; }
+}
+</style>
+
+<footer role="contentinfo">
   <div class="flogo">⬡ FixMySpine AI</div>
   <div class="ftxt">
-    Free forever · On-device AI · No tracking · DPDPA 2023 · GDPR · CCPA · PIPEDA · PDPA<br>
+    Free forever · On-device AI · Zero uploads · No biometric ID · Privacy-first · DPDPA · GDPR · CCPA<br>
     <a href="#" onclick="openModal('privacy-modal');return false">Privacy Policy</a> ·
     <a href="#" onclick="openModal('tos-modal');return false">Terms of Service</a> ·
     <a href="#" onclick="openCalendly();return false">Book Expert</a> ·
@@ -2334,7 +2521,7 @@ const GR_PoseLibrary = (function(){
     'Bhramari','Humming Bee Breath',
     'Dirga Pranayama','Three-Part Breath',
     'Ujjayi','Ocean Breath',
-    // Therapeutic / remedial
+    // Wellness-focused / remedial
     'Cat-Cow','Marjaryasana-Bitilasana',
     'Child Pose','Balasana',
     'Thread the Needle',
@@ -3027,7 +3214,7 @@ const STRINGS = {
     w_s2_h1:   'Cardiovascular Health',
     w_s3_h1:   'Spinal & Joint Health',
     w_s4_h1:   'Breathing Health & Review',
-    w_s2_sub:  'Your answers directly control inversion timers and BP alerts. All required.',
+    w_s2_sub:  'Your answers directly control inversion timers and posture reminders. All required.',
     w_s3_sub:  'Enables hold-time caps and personalised posture correction alerts.',
     w_s4_sub:  'Last section. Then review your safety profile and begin.',
     w_flags:   'YOUR SAFETY FLAGS',
@@ -3046,7 +3233,7 @@ const STRINGS = {
     p_office:  'Office / Desk Posture',
     p_gym:     'Gym / Strength Training',
     p_medtn:   'Meditation',
-    p_rehab:   'Physical Therapy / Rehab',
+    p_rehab:   'Wellness Guidance / Rehab',
     p_sports:  'Sports / Athletics',
     // Age options
     a_u18:'Under 18', a_1825:'18–25', a_2635:'26–35',
@@ -3363,7 +3550,7 @@ const STRINGS = {
     w_age_lbl:'Altersgruppe', w_age_ph:'Altersgruppe auswählen',
     w_prac_lbl:'Hauptpraxis', w_prac_ph:'Praxis auswählen',
     p_yoga:'Yoga / Asana', p_prana:'Pranayama / Atemübungen', p_office:'Büro / Schreibtischhaltung',
-    p_gym:'Gym / Krafttraining', p_medtn:'Meditation', p_rehab:'Physiotherapie / Rehabilitation',
+    p_gym:'Gym / Krafttraining', p_medtn:'Meditation', p_rehab:'Physiotherapie / Wellness Recovery',
     p_sports:'Sport / Leichtathletik',
     a_u18:'Unter 18', a_1825:'18–25', a_2635:'26–35', a_3645:'36–45', a_4655:'46–55', a_5665:'56–65', a_65p:'65+',
     btn_continue:'Weiter →', btn_back:'← Zurück', btn_activate:'🚀 Analyse aktivieren',
@@ -3639,7 +3826,7 @@ const PRAC_CTX = {
   'Office / Desk Posture':     'prac_office',
   'Gym / Strength Training':   'prac_gym',
   'Meditation':                'prac_meditation',
-  'Physical Therapy / Rehab':  'prac_rehab',
+  'Wellness Guidance / Rehab':  'prac_rehab',
   'Sports / Athletics':        'prac_sports',
 };
 
@@ -3898,6 +4085,7 @@ window._speechLang = 'en-IN';
 
     setTimeout(() => {
       document.getElementById('consent-wall')?.classList.add('passed');
+    document.body.classList.add('analysis-active');
     }, 280);
   };
 
@@ -5581,7 +5769,7 @@ const SPINA_KB = [
   { id:'y009', domain:'yoga', tags:['savasana','corpse','relaxation','integration','nervous system'],
     content:`Savasana (Corpse Pose) — The most important pose in the practice, often skipped. Minimum 5 minutes allows the nervous system to consolidate the physical practice. Arms rest slightly away from the body (palms up). Legs roll naturally outward. For lower back discomfort, knees bent with feet flat is a helpful modification. Side-lying Savasana is recommended for late-stage pregnancy.` },
   { id:'y010', domain:'yoga', tags:['cat cow','mobility','spine','warmup','breath coordination'],
-    content:`Cat-Cow (Marjaryasana-Bitilasana) — The most accessible spinal mobility sequence. Moving in sync with breath is the entire practice — breath drives movement. The head moves last in the wave, following the spine. Wrists directly under shoulders. Moving slowly (one full breath per movement) yields more therapeutic benefit than fast repetitions. Excellent as daily morning practice for 5 minutes.` },
+    content:`Cat-Cow (Marjaryasana-Bitilasana) — The most accessible spinal mobility sequence. Moving in sync with breath is the entire practice — breath drives movement. The head moves last in the wave, following the spine. Wrists directly under shoulders. Moving slowly (one full breath per movement) yields more wellness-focused benefit than fast repetitions. Excellent as daily morning practice for 5 minutes.` },
   { id:'y011', domain:'yoga', tags:['inversion','shoulderstand','sarvangasana','thyroid','BP'],
     content:`Shoulderstand (Sarvangasana) — Classified as a major inversion. Absolutely contraindicated for uncontrolled high blood pressure, glaucoma, detached retina, and neck injuries. Even for healthy practitioners, the chin-to-chest position compresses the cervical spine — blankets under the shoulders are essential to preserve the natural curve. Beginners: Viparita Karani (Legs Up the Wall) is a safe alternative.` },
   { id:'y012', domain:'yoga', tags:['headstand','sirsasana','core','inversion','advanced'],
@@ -5633,7 +5821,7 @@ const SPINA_KB = [
   { id:'c003', domain:'conditions', tags:['disc','herniation','prolapse','forward fold','inversion'],
     content:`Disc Herniation / Prolapse and Exercise — Forward folds increase intradiscal pressure significantly — the most important category to modify. Rule: if any exercise reproduces leg symptoms (pain, tingling, numbness down the leg), stop immediately. McKenzie exercises (prone extension — baby cobra) often reduce centralisation. Avoid: full forward folds, heavy deadlifts with rounding, prolonged sitting with flexion. Safe: walking, gentle extension work, swimming. Physiotherapist clearance recommended before any yoga practice.` },
   { id:'c004', domain:'conditions', tags:['scoliosis','lateral curve','asymmetry','yoga','exercise'],
-    content:`Scoliosis and Yoga — Scoliosis requires individual assessment — generalised advice is limited. Side-bending poses need to be adapted (often avoiding the concave side deepening). Twists may need to be asymmetric — one direction may be therapeutic while the other aggravating. Core strengthening (without spinal loading) is generally beneficial. Inversions: individual assessment required. The single most important advice: work with a physiotherapist or IAYT-certified yoga therapist before self-practice.` },
+    content:`Scoliosis and Yoga — Scoliosis requires individual assessment — generalised advice is limited. Side-bending poses need to be adapted (often avoiding the concave side deepening). Twists may need to be asymmetric — one direction may be wellness-focused while the other aggravating. Core strengthening (without spinal loading) is generally beneficial. Inversions: individual assessment required. The single most important advice: work with a physiotherapist or IAYT-certified yoga therapist before self-practice.` },
   { id:'c005', domain:'conditions', tags:['diabetes','blood sugar','yoga','exercise','timing'],
     content:`Diabetes and Exercise/Yoga — Check blood glucose before practice. Target range for exercise start: 100-250 mg/dL. Below 100: eat a small snack and recheck. Above 250 with ketones: delay exercise. Keep fast-acting glucose nearby. Exercise lowers blood glucose — peak effect 2-4 hours after session. Yoga poses that stimulate abdominal organs (cobra, bow, spinal twist) support pancreatic function over time. Post-exercise hypoglycemia monitoring for 12-24 hours in Type 1.` },
   { id:'c006', domain:'conditions', tags:['anxiety','panic','breath','yoga','calming'],
@@ -6755,7 +6943,7 @@ const POSE_DB = {
     type: 'spinal_mobility',
     focus: ['Breath coordination', 'Full spinal wave', 'Wrist alignment'],
     common_errors: [
-      'Moving too quickly — slowing to match the breath creates more therapeutic benefit',
+      'Moving too quickly — slowing to match the breath creates more wellness-focused benefit',
       'Neck leading rather than following the spine — the head moves last in the wave',
       'Wrists behind the shoulders — placing them directly under them protects the joints',
       'Collapsing through the lower back in cow — a gentle core engagement helps',
@@ -7575,7 +7763,7 @@ document.addEventListener('keydown', e => {
       <ul style="margin:0 0 14px 16px;">
         <li><strong style="color:var(--red);">Stop immediately</strong> if you experience pain, dizziness, shortness of breath, chest tightness, or any adverse symptoms</li>
         <li>Consult a qualified medical practitioner before beginning any exercise programme, particularly with pre-existing cardiovascular, spinal, respiratory, or metabolic conditions</li>
-        <li>Do not rely solely on this app during medically supervised rehabilitation programmes</li>
+        <li>Do not rely solely on this app during medically supervised wellness recovery programmes</li>
         <li>You are solely responsible for your physical safety during use of the App</li>
         <li>In an emergency, stop using the App and call your local emergency number immediately</li>
       </ul>
